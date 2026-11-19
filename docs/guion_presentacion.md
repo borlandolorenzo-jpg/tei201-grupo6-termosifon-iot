@@ -1,17 +1,17 @@
 # Guion de presentación — Avance 3 (23 de noviembre de 2026)
 
 **Tiempo:** 8–10 min de presentación + 3 min de preguntas. **Todos deben hablar.**
-**Roles sugeridos:** *Lorenzo* → electrónica, firmware y demo · *Cristóbal* → diseño 3D · *Micaela* → problema, dashboard, testing y GitHub. Ajustar según quién hizo cada parte: cada persona debe poder explicar lo que presenta.
+**Roles sugeridos:** *Lorenzo* → electrónica, firmware, diseño 3D y demo · *Cristóbal* → solución y arquitectura, GitHub y apoyo en la demo · *Micaela* → problema, dashboard y testing. Ajustar según quién hizo cada parte: cada persona debe poder explicar lo que presenta.
 
 ## Secuencia (10 min)
 
 | Min | Diapositiva | Quién | Qué decir |
 |---|---|---|---|
 | 0:00–1:00 | 1. Problema | Micaela | Pobreza energética en Chile: calentar agua es caro. El termosifón solar la calienta sin electricidad, pero de noche el flujo se invierte y el tanque pierde calor (hasta ≈ 40 % de lo captado en algunos sistemas). ODS 7 |
-| 1:00–2:00 | 2. Solución y arquitectura | Lorenzo | Mide, decide, actúa y registra: 3 sondas DS18B20 → ESP32 → válvula (servo SG90 que la simula) → Firebase → dashboard. Controlador diferencial con histéresis, no PID: es la solución más simple que cumple |
+| 1:00–2:00 | 2. Solución y arquitectura | Cristóbal | Mide, decide, actúa y registra: 2 sondas DS18B20 (colector y tanque) → ESP32 → válvula (servo SG90 que la simula) → Firebase → dashboard. Controlador diferencial con histéresis, no PID: es la solución más simple que cumple |
 | 2:00–5:30 | 3. **Demo en vivo** | Lorenzo y Micaela | Ver guion de demo abajo |
 | 5:30–6:30 | 4. Hardware | Lorenzo | Perfboard soldada, ESP32 en zócalos, sondas y servo con conectores. Mostrar fotos de 3 ángulos, BOM con costo total y justificación de componentes |
-| 6:30–7:30 | 5. Diseño 3D | Cristóbal | Gemelo 3D: todos los componentes con volúmenes reales. Decisiones: dos piezas con 4 tornillos, compartimiento del servo, accesos USB y jack. Abrir Fusion y mostrar el interior; planos y renders |
+| 6:30–7:30 | 5. Diseño 3D | Lorenzo | Gemelo 3D: todos los componentes con volúmenes reales. Decisiones: dos piezas con 4 tornillos, compartimiento del servo, accesos USB y jack. Abrir Fusion y mostrar el interior; planos y renders |
 | 7:30–9:00 | 6. Testing y validación | Micaela | Protocolo P1–P6: calibración vs. referencia, lógica de control, conectividad, alimentación, ensayo nocturno A/B (con y sin válvula) y desempeño diurno. Criterios medibles. Los datos definitivos están pendientes; explicar el procedimiento y mostrar las pruebas unitarias que ya pasan |
 | 9:00–9:30 | 7. GitHub | Cristóbal | Mostrar el repositorio: carpetas, README, FUENTES.md |
 | 9:30–10:00 | 8. Cierre | Todos | Qué resolvimos, qué falta (ensayos y análisis) y próximos pasos |
@@ -20,7 +20,7 @@
 
 **Antes de empezar (preparación obligatoria):** sistema encendido y "En línea" en el dashboard, WiFi probado, dashboard abierto en una pestaña, Monitor Serie abierto en otra, sondas ubicadas (colector, tanque, ambiente) y dos vasos con agua fría y caliente listos para provocar ΔT.
 
-1. **Datos reales (30 s).** Mostrar el dashboard actualizándose: temperaturas de las tres sondas, hora de la última lectura.
+1. **Datos reales (30 s).** Mostrar el dashboard actualizándose: temperaturas de las sondas (colector y tanque), hora de la última lectura.
 2. **Sensor → decisión → actuador (60 s).** Con la válvula cerrada, sumergir la sonda del colector en el agua caliente: ΔT sube; al superar 5 K el servo se abre y el chip del dashboard cambia a ABIERTA (el LED verde se enciende). Sacar la sonda y enfriarla: al bajar de 2 K la válvula se cierra.
 3. **Información útil (30 s).** Mostrar los indicadores: cierres, horas de flujo inverso evitado, temperatura máxima. Explicar cómo ayudan a decidir.
 4. **Robustez (30 s).** Desconectar la sonda del tanque: LED rojo parpadea, el dashboard muestra la alerta y la válvula queda abierta (modo seguro). Reconectar.

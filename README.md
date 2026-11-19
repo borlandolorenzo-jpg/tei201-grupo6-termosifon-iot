@@ -17,17 +17,17 @@ En Chile, calentar agua es un gasto importante para los hogares en situación de
 ## Arquitectura
 
 ```
- DS18B20 ×3 ──► ESP32 ──► decisión (control.h) ──► servo SG90 (válvula)
- (colector,       │
-  tanque,         ├──► LED (estado) 
-  ambiente)       └──► WiFi ──► Firebase Realtime DB ──► Dashboard web
+ DS18B20 ×2 ──► ESP32 ──► decisión (control.h) ──► servo SG90 (válvula)
+ (colector y     │
+  tanque; ambi-   ├──► LED (estado) 
+  ente opcional)  └──► WiFi ──► Firebase Realtime DB ──► Dashboard web
 ```
 
 Más detalle en [`docs/arquitectura.md`](docs/arquitectura.md).
 
 | Subsistema | Componente | Función |
 |---|---|---|
-| Sensores | 3× DS18B20 sumergibles | T colector, T tanque, T ambiente |
+| Sensores | 2× DS18B20 sumergibles (+1 opcional de ambiente) | T colector y T tanque; T ambiente si se instala la tercera sonda (`HAS_AMBIENT` en `config.h`) |
 | Procesamiento | ESP32 DevKit V1 | Lectura, control diferencial con histéresis, envío de datos |
 | Actuador | Servo SG90 | Abre / cierra (simula la válvula) |
 | Conectividad | WiFi + Firebase Realtime Database (REST) | Repositorio persistente |

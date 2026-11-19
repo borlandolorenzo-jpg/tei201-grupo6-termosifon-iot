@@ -24,7 +24,7 @@ Guía para pasar el circuito del protoboard a una perfboard soldada dentro del e
 | VIN | +5V | Fuente y servo (rojo) |
 | GND | GND | Riel común |
 | 3V3 | +3V3 | VDD de las sondas y R1 |
-| GPIO4 | ONEWIRE | DQ de las 3 sondas, R1 |
+| GPIO4 | ONEWIRE | DQ de las sondas (2 instaladas; J4 reservado a la opcional de ambiente), R1 |
 | GPIO18 | SERVO_PWM | Servo (naranja) |
 | GPIO26 | LED_OK | R2 → LED verde → GND |
 | GPIO27 | LED_FAIL | R3 → LED rojo → GND |
@@ -33,7 +33,7 @@ Guía para pasar el circuito del protoboard a una perfboard soldada dentro del e
 - [ ] Sin cortocircuitos entre redes (medido con multímetro)
 - [ ] Todas las soldaduras brillantes y firmes (tirar suavemente de los cables)
 - [ ] Polaridad de C1 correcta
-- [ ] Cada sonda etiquetada (COL, TANK, AMB) y coincide con `config.h`
+- [ ] Cada sonda etiquetada (COL, TANK y, si existe, AMB) y coincide con `config.h`
 - [ ] El servo se mueve libre, sin forzar el tope
 - [ ] Cables sujetos con amarras para que no tiren de las soldaduras
 - [ ] Fotografías tomadas **desde al menos 3 ángulos** (pedido en la rúbrica)

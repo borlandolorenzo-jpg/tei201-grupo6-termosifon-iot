@@ -9,9 +9,12 @@ Guía para modelar en **Fusion 360** el encapsulado y el ensamble completo (geme
 | Archivo | Contenido | Estado |
 |---|---|---|
 | `layout_interno_propuesto.svg/.png` | Distribución interna en planta (referencia para el boceto) | Listo |
+| `modelo_referencia/` | **Modelo 3D de referencia** generado con CadQuery: `base.step`, `tapa.step`, `ensamble_completo.step` (con todos los componentes), STL de la base y la tapa, `componentes.csv` y los scripts que los generan. Se importa a Fusion 360 como punto de partida | Listo (medidas nominales) |
 | `encapsulado_termosifon.f3z` | Ensamble completo en Fusion 360 | **Pendiente (modelar)** |
-| `planos/` | PDF de planos técnicos con vistas, cotas y escala | **Pendiente (exportar)** |
-| `renders/` | Render exterior y render interior o explosionado (PNG) | **Pendiente (exportar)** |
+| `planos/plano_referencia.pdf/.svg` | Plano A3 1:1 de referencia: vista frontal, lateral, planta y corte A-A con cotas y tolerancias | Listo como referencia · **reemplazar por el plano exportado de Fusion 360** |
+| `renders/` | `render_exterior.png`, `render_interior.png`, `render_explosionado.png` (del modelo de referencia) | Listo como referencia · **rehacer con materiales en Fusion 360 (espacio Render)** |
+
+> **Cómo usar el modelo de referencia:** en Fusion 360 usa *Insertar → Insertar malla / Abrir* con `modelo_referencia/ensamble_completo.step` para ver el ensamble y comparar tus medidas reales. Es un sólido importado, no paramétrico: la rúbrica pide un modelo **paramétrico**, así que rehaz la base y la tapa con los parámetros de la sección 3 (puedes copiar las cotas del plano) y guarda el `.f3z`. Las medidas del modelo son nominales y **deben verificarse con pie de metro** para que coincidan con el prototipo físico. Para regenerar el modelo con otras medidas: edita los parámetros al inicio de `modelo_referencia/generar_modelo.py` y ejecuta `python3 generar_modelo.py` (requiere `pip install cadquery`).
 
 ## 2. Componentes del gemelo (volúmenes referenciales)
 

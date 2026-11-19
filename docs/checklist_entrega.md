@@ -29,10 +29,10 @@
 ## Diseño 3D (20 %)
 | Ítem | Estado |
 |---|---|
-| Archivo `.f3d`/`.f3z` con el ensamble completo (todos los componentes) | 🔧 modelar con la guía de `diseño-3d/README.md` |
+| Archivo `.f3d`/`.f3z` con el ensamble completo (todos los componentes) | 🔧 modelar en Fusion con la guía de `diseño-3d/README.md`; hay un ensamble de referencia importable en `diseño-3d/modelo_referencia/ensamble_completo.step` |
 | Modelo paramétrico sin interferencias | 🔧 |
-| Planos con vistas, cotas, tolerancias y escala (PDF) | 🔧 |
-| Renders exterior e interior o explosionado | 🔧 |
+| Planos con vistas, cotas, tolerancias y escala (PDF) | ✅ referencia en `diseño-3d/planos/plano_referencia.pdf` · 🔧 reemplazar por el exportado de Fusion |
+| Renders exterior e interior o explosionado | ✅ referencia en `diseño-3d/renders/` · 🔧 rehacer en Fusion con materiales |
 | Consistencia con el prototipo físico | 🔧 medir con pie de metro |
 
 ## Testing y validación (10 %)

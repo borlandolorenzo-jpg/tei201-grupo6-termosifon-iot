@@ -37,6 +37,7 @@
 |---|---|---|
 | pandas, NumPy, Matplotlib (Python 3) | `testing/analisis.py`: cálculo de indicadores y gráficos | https://pandas.pydata.org · https://numpy.org · https://matplotlib.org |
 | Node.js (solo `assert`, módulo estándar) | `testing/unit/test_analytics.js` | https://nodejs.org |
+| CadQuery 2.8.0 (Python) | `diseño-3d/modelo_referencia/generar_modelo.py`: modelo 3D de referencia (STEP/STL) | https://github.com/CadQuery/cadquery |
 
 ---
 
@@ -83,7 +84,7 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 - **Verificación:** el script se probó con datos **sintéticos generados solo para validar el código**; esos datos no se incluyen en el repositorio ni se usan como resultados.
 
 ### 3.5 Documentación y diseño
-- **Qué generó la IA:** borradores del protocolo de testing, README, esquemático en SVG (`hardware/esquematico.svg`), BOM, guía del gemelo 3D, guion de presentación y diapositivas.
+- **Qué generó la IA:** borradores del protocolo de testing, README, esquemático en SVG (`hardware/esquematico.svg`), BOM, guía del gemelo 3D, guion de presentación y diapositivas. También el modelo 3D de **referencia** (`diseño-3d/modelo_referencia/`, script en Python con la librería CadQuery 2.8.0, STEP/STL, renders en three.js y plano en SVG/PDF) a partir de medidas nominales de hojas de datos; el modelo paramétrico final en Fusion 360 lo hace el equipo.
 - **Adaptación:** el equipo revisó el contenido contra el diseño real del proyecto y completó los valores marcados como pendientes (costos reales de la BOM, medidas con pie de metro, resultados). **[COMPLETAR]**
 - **Costos de la BOM:** los valores unitarios son estimados y deben reemplazarse por los de las boletas.
 

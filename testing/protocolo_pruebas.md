@@ -8,7 +8,7 @@ subtitle: "TEI 201 · Taller de Diseño en Ingeniería · Grupo 6 · Avance N.º
 
 # 0. Alcance y estado
 
-El prototipo mide tres temperaturas (salida del colector, tanque y ambiente) con sondas DS18B20, decide con un controlador diferencial con histéresis si la válvula debe estar abierta o cerrada, mueve un servo SG90 que **simula** la válvula y envía los datos a Firebase para visualizarlos en un dashboard.
+El prototipo mide dos temperaturas de control (salida del colector y tanque) con sondas DS18B20 y, si se instala la sonda opcional, la temperatura ambiente, decide con un controlador diferencial con histéresis si la válvula debe estar abierta o cerrada, mueve un servo SG90 que **simula** la válvula y envía los datos a Firebase para visualizarlos en un dashboard.
 
 Este documento define **cómo se comprobará** que el sistema funciona y que responde al problema del Avance 1: *el termosifón pierde calor de noche por flujo inverso (el agua caliente del tanque desciende por el colector frío)*. Las pruebas se dividen en seis ensayos, P1 a P6.
 
@@ -17,6 +17,8 @@ Este documento define **cómo se comprobará** que el sistema funciona y que res
 | Pruebas unitarias del controlador en PC (7 grupos, todas pasan) | `testing/unit/resultado_test_control.txt` |
 | Pruebas unitarias de los indicadores del dashboard (9, todas pasan) | `testing/unit/resultado_test_analytics.txt` |
 | Ensayos P1–P6 con el hardware | **Pendientes** (se ejecutan después del Avance 3 con el procedimiento de la sección 4) |
+
+**Sonda de ambiente:** el prototipo se construyó con 2 sondas (S1 colector y S2 tanque), que son las únicas que usa el controlador. La sonda S3 (ambiente) es opcional (`HAS_AMBIENT` en `config.h`); si no se instala, la temperatura ambiente de los ensayos nocturnos se registra con el termómetro de referencia.
 
 **Limitación declarada:** el servo reemplaza a la válvula real (la solenoide de 12 V se descartó por costo). Los ensayos validan la lógica de decisión, la instrumentación y el flujo de datos; el efecto hidráulico de una válvula real sobre el termosifón debe confirmarse en una etapa posterior.
 
@@ -43,7 +45,7 @@ Este documento define **cómo se comprobará** que el sistema funciona y que res
 |---|---|---|---|---|---|
 | Temperatura salida del colector | T_col | Medida | DS18B20 (S1) | °C | ±0.5 °C (fabricante); resolución 0.0625 °C |
 | Temperatura del tanque | T_tank | Medida / respuesta | DS18B20 (S2) | °C | ±0.5 °C; resolución 0.0625 °C |
-| Temperatura ambiente (sombra) | T_amb | Medida / registrada | DS18B20 (S3) | °C | ±0.5 °C; resolución 0.0625 °C |
+| Temperatura ambiente (sombra) | T_amb | Medida / registrada | DS18B20 (S3, opcional) | °C | ±0.5 °C; resolución 0.0625 °C |
 | Diferencia de temperatura | ΔT = T_col − T_tank | Calculada | — | K | ≈ ±0.7 K (combinación de dos sondas) |
 | Estado de la válvula | V | Respuesta | Firmware (registro) | 0 / 1 | — |
 | Temperatura de referencia | T_ref | Medida (patrón) | Termómetro de referencia (ver 3.1) | °C | Declarar la del instrumento usado |
@@ -79,7 +81,7 @@ Este documento define **cómo se comprobará** que el sistema funciona y que res
 
 ## 3.1 Instrumentos y equipos
 
-- Prototipo completo (ESP32 + 3 DS18B20 + servo SG90 + perfboard + encapsulado), fuente 5 V / 2 A.
+- Prototipo completo (ESP32 + 2 DS18B20 + servo SG90 + perfboard + encapsulado), fuente 5 V / 2 A.
 - Termómetro de referencia independiente (digital, con resolución ≤ 0.1 °C). Anotar marca, modelo y su incertidumbre.
 - Recipientes con agua: hielo triturado (0 °C), agua a temperatura ambiente y agua caliente (≈ 40 °C y ≈ 60 °C), con agitación manual o magnética.
 - Multímetro (tensión y corriente continua), cronómetro o cámara a 60 fps.
@@ -105,7 +107,7 @@ Este documento define **cómo se comprobará** que el sistema funciona y que res
 ## P1 · Verificación de las sondas contra una referencia (O1)
 
 1. Preparar cuatro baños: hielo (0 °C), ambiente (≈ 20 °C), tibio (≈ 40 °C) y caliente (≈ 60 °C), con agitación.
-2. Sumergir en el mismo baño las tres sondas DS18B20 y el termómetro de referencia, a la misma profundidad y sin tocar las paredes.
+2. Sumergir en el mismo baño las sondas DS18B20 y el termómetro de referencia, a la misma profundidad y sin tocar las paredes.
 3. Esperar a que se estabilicen: la referencia debe variar menos de 0.05 °C por minuto durante 3 minutos.
 4. Registrar durante 5 minutos: 30 lecturas por sonda (una cada 10 s, desde el Monitor Serie o el dashboard) y la lectura de referencia en cada instante.
 5. Anotar cada lectura en `testing/datos/plantilla_P1_calibracion.csv` (columnas `punto, t_ref_c, sensor, t_medida_c`).
