@@ -14,10 +14,10 @@
 
 | Librería | Versión | Uso en el proyecto | Fuente |
 |---|---|---|---|
-| OneWire (Paul Stoffregen) | **[COMPLETAR: versión instalada]** | Protocolo 1-Wire para comunicar las 3 sondas DS18B20 en un solo pin (GPIO4) | https://github.com/PaulStoffregen/OneWire |
-| DallasTemperature (Miles Burton) | **[COMPLETAR]** | Lectura de temperatura de las DS18B20 por dirección ROM, resolución de 12 bits, conversión sin bloqueo | https://github.com/milesburton/Arduino-Temperature-Control-Library |
-| ESP32Servo | **[COMPLETAR]** | Control PWM a 50 Hz del servo SG90 que simula la válvula | https://github.com/madhephaestus/ESP32Servo |
-| Arduino core para ESP32 (Espressif): `WiFi.h`, `WiFiClientSecure.h`, `HTTPClient.h`, `time.h` | **[COMPLETAR: versión del core]** | Conexión WiFi, peticiones HTTPS a Firebase y hora por NTP | https://github.com/espressif/arduino-esp32 |
+| OneWire (Paul Stoffregen; autores originales Jim Studt, Tom Pollard y otros) | 2.3.8 | Protocolo 1-Wire para comunicar las sondas DS18B20 en un solo pin (GPIO4): 2 en este prototipo (colector y tanque); la de ambiente es opcional (`HAS_AMBIENT` en `config.h`) | https://github.com/PaulStoffregen/OneWire |
+| DallasTemperature (Miles Burton) | 4.0.6 | Lectura de temperatura de las DS18B20 por dirección ROM, resolución de 12 bits, conversión sin bloqueo | https://github.com/milesburton/Arduino-Temperature-Control-Library |
+| ESP32Servo (Kevin Harrington, John K. Bennett) | 3.2.1 | Control PWM a 50 Hz del servo SG90 que simula la válvula | https://github.com/madhephaestus/ESP32Servo |
+| Arduino core para ESP32 (Espressif): `WiFi.h`, `WiFiClientSecure.h`, `HTTPClient.h`, `time.h` | esp32 by Espressif Systems 3.3.4 | Conexión WiFi, peticiones HTTPS a Firebase y hora por NTP | https://github.com/espressif/arduino-esp32 |
 
 ### Dashboard (navegador)
 
@@ -68,8 +68,8 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 ### 3.2 Firmware `firmware/main/main.ino`, `config.h.example` y `firmware/utils/escanear_ds18b20`
 - **Qué generó la IA:** estructura general del programa, cola de muestras, envío a Firebase, indicadores LED, utilidad para leer las direcciones de las sondas.
 - **Adaptación:** pines (GPIO4, 18, 26, 27), periodo de muestreo de 10 s justificado por la inercia térmica del tanque, modo `CONTROL_ENABLED` para el ensayo B (sin válvula). **[COMPLETAR: cambios hechos al probar con el hardware]**.
-- **Comprensión del equipo:** cada 10 s se pide la temperatura, se espera 800 ms, se leen las tres sondas, el controlador decide el estado de la válvula, se mueve el servo, la muestra entra a la cola y se envía a Firebase si hay WiFi.
-- **Verificación:** el código se revisó contra cabeceras simuladas de Arduino para detectar errores de sintaxis en PC; la compilación y carga en el ESP32 real la realiza el equipo. **[COMPLETAR: confirmar que compiló y cargó]**.
+- **Comprensión del equipo:** cada 10 s se pide la temperatura, se espera 800 ms, se leen las sondas (colector y tanque; ambiente si existe), el controlador decide el estado de la válvula, se mueve el servo, la muestra entra a la cola y se envía a Firebase si hay WiFi.
+- **Verificación:** el código se revisó contra cabeceras simuladas de Arduino para detectar errores de sintaxis en PC; el equipo compiló el programa en Arduino IDE (placa ESP32 Dev Module, core 3.3.4) sin errores: 1 053 931 bytes de programa (80 %) y 51 984 bytes de memoria dinámica (15 %), el 19 de noviembre de 2026. **[COMPLETAR: confirmar que cargó y funcionó en el ESP32 real]**.
 
 ### 3.3 Dashboard `dashboard/` (HTML, CSS, JavaScript)
 - **Qué generó la IA:** interfaz, gráficos con Chart.js, indicadores del periodo, alertas, exportación a CSV, modo de demostración con datos simulados (`?demo=1`, claramente rotulado y no usado como evidencia).
@@ -90,4 +90,13 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 ---
 
 ## 4. Elementos creados enteramente por el equipo
-**[COMPLETAR por el equipo]** — por ejemplo: diseño del colector solar, montaje físico, soldadura de la perfboard, modelo 3D en Fusion 360, fotografías y ensayos.
+
+| Elemento | Responsables |
+|---|---|
+| Diseño y construcción del colector solar termosifón (materiales y medidas en `hardware/BOM.xlsx`, hoja del colector) | Micaela Miserda, Cristóbal Fuentes y Lorenzo Borlando |
+| Montaje físico y soldadura de la perfboard (ESP32, borneras, servo, LED) | Lorenzo Borlando |
+| Modelo 3D, planos y renders en Fusion 360 (`diseño-3d/`) | Lorenzo Borlando |
+| Fotografías del prototipo | Micaela Miserda, Cristóbal Fuentes y Lorenzo Borlando |
+| Ensayos del protocolo P1–P6 y registro de datos | Micaela Miserda, Cristóbal Fuentes y Lorenzo Borlando |
+
+**[COMPLETAR por el equipo]** — agregar aquí cualquier otro elemento hecho por el equipo (por ejemplo, modificaciones a los códigos al probar con el hardware).
