@@ -1,0 +1,7 @@
+# Credenciales: NO subir
+firmware/main/config.h
+# Archivos temporales
+__pycache__/
+*.pyc
+.DS_Store
+testing/resultados/

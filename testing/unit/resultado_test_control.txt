@@ -1,0 +1,31 @@
+[T1] Arranque y apertura con sol
+  ok:    arranca abierta (comportamiento sin válvula)
+  ok:    dT=2 K al arrancar -> cierra
+  ok:    dT=10 K -> abre
+[T2] Histéresis: sin conmutación dentro de la banda muerta
+  ok:    200 muestras con dT en [2.5, 4.5] K -> 0 conmutaciones
+[T3] Umbrales exactos
+  ok:    dT=2.0 -> cerrada
+  ok:    dT=4.9 sigue cerrada
+  ok:    dT=5.0 abre
+  ok:    dT=2.1 sigue abierta
+  ok:    dT=2.0 cierra
+  ok:    contador de cierres = 2
+[T4] Tiempo mínimo entre movimientos
+  ok:    a los 10 s no se mueve (dwell 60 s)
+  ok:    a los 61 s sí abre
+[T5] Falla de sensor -> fail-open
+  ok:    cerrada antes de la falla
+  ok:    1 lectura inválida: mantiene estado, sin falla
+  ok:    3 lecturas inválidas seguidas -> FALLA
+  ok:    en falla la válvula queda abierta (ignora dwell)
+  ok:    sensor recuperado -> sale de FALLA
+[T6] Sobretemperatura del tanque
+  ok:    tanque 64.9 °C: opera normal
+  ok:    tanque 65 °C: cierra por sobretemperatura
+  ok:    tanque 62 °C: aún en banda de reanudación, sigue cerrada
+  ok:    tanque 60 °C: reanuda operación normal
+[T7] Desborde de millis() (32 bits)
+  ok:    el tiempo mínimo se calcula bien tras el desborde
+
+RESULTADO: TODAS LAS PRUEBAS PASARON (0 fallas)

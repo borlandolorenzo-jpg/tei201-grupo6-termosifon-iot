@@ -1,0 +1,13 @@
+punto,t_ref_c,sensor,t_medida_c
+hielo,0.0,COL,
+hielo,0.0,TANK,
+hielo,0.0,AMB,
+ambiente,20.0,COL,
+ambiente,20.0,TANK,
+ambiente,20.0,AMB,
+tibia,40.0,COL,
+tibia,40.0,TANK,
+tibia,40.0,AMB,
+caliente,60.0,COL,
+caliente,60.0,TANK,
+caliente,60.0,AMB,

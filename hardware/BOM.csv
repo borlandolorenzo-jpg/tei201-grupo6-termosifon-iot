@@ -1,0 +1,21 @@
+n,componente,especificacion,cantidad,costo_unitario_clp_estimado,costo_total_clp,funcion
+1,ESP32 DevKit V1 (30 pines),"ESP32-WROOM-32, WiFi + BT, 3.3 V lógico, 12-bit ADC",1,8000,8000,"Microcontrolador: lee sondas, controla el servo, envía datos a Firebase"
+2,Sonda de temperatura DS18B20 sumergible,"Rango −55…+125 °C, ±0.5 °C (−10…+85 °C), 12 bit (0.0625 °C), cable 1 m, acero inox.",3,3500,10500,"Medir T colector, T tanque y T ambiente"
+3,Servomotor SG90 9 g,"4.8–6 V, torque ≈ 1.8 kg·cm, ≈ 650 mA en bloqueo",1,3000,3000,Simula la válvula (abierta/cerrada)
+4,Resistencia 4.7 kΩ,"1/4 W, 5 %",1,50,50,Pull-up del bus 1-Wire
+5,Resistencia 220 Ω,"1/4 W, 5 %",2,50,100,Limitar corriente de los LED
+6,LED 5 mm verde,"2 V típico, 20 mA máx.",1,100,100,Indicador: válvula abierta
+7,LED 5 mm rojo,"2 V típico, 20 mA máx.",1,100,100,Indicador: falla de sensor / sin WiFi
+8,Condensador electrolítico 470 µF,16 V,1,300,300,Desacople del servo
+9,Placa perforada (perfboard),"7 × 9 cm, paso 2.54 mm",1,1500,1500,Soporte del circuito soldado
+10,Regleta hembra 15 pines,Paso 2.54 mm,2,500,1000,Zócalo del ESP32
+11,Bornera atornillable 3 pines,Paso 5.08 mm,3,700,2100,Conexión de cada sonda DS18B20 (J2–J4)
+12,Regleta macho 3 pines,Paso 2.54 mm,1,100,100,Conector del servo (J5)
+13,Jack DC hembra con bornes,5.5 × 2.1 mm,1,800,800,Entrada de alimentación (J1)
+14,Fuente de alimentación 5 V / 2 A,"Conector 5.5 × 2.1 mm, centro positivo",1,5000,5000,Alimentación del sistema
+15,Cable multifilar 22 AWG,Varios colores,2,500,1000,Cableado interno (valor por metro)
+16,Estaño 60/40 y tubo termocontraíble,Porción de uso,1,1500,1500,Soldadura y aislación de uniones
+17,Tornillos M3×8 y tuercas,Pack de 8 uds.,1,1500,1500,Fijación de tapa y perfboard
+18,Separadores M3 de 6 mm,Latón o nylon,4,250,1000,Elevar la perfboard del fondo
+19,Filamento PLA/PETG (impresión 3D),≈ 25 CLP/g; estimado 120 g,120,25,3000,Encapsulado impreso
+,TOTAL,,,,40650,

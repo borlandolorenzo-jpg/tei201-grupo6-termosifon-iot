@@ -1,0 +1,11 @@
+  ok: sin datos genera alerta
+  ok: cierres y horas de flujo inverso evitado
+  ok: huecos mayores a 60 s no se integran
+  ok: alerta de dispositivo sin reportar
+  ok: alertas de falla, sobretemperatura y agua lista
+  ok: calor almacenado: 20 L y +10 K = 0.2326 kWh
+  ok: downsample respeta el máximo y conserva el último punto
+  ok: CSV tiene encabezado y una línea por fila
+  ok: datos demo: se generan y el controlador cierra de noche
+
+9 pruebas pasaron

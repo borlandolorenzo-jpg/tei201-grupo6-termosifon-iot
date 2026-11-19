@@ -1,0 +1,46 @@
+/*
+ * config.h.example — COPIAR como "config.h" (misma carpeta) y completar.
+ * config.h está en .gitignore para no subir contraseñas a GitHub.
+ */
+#pragma once
+
+// ---------- WiFi ----------
+#define WIFI_SSID "NOMBRE_DE_LA_RED"
+#define WIFI_PASS "CLAVE_DE_LA_RED"
+
+// ---------- Firebase Realtime Database (REST) ----------
+// URL sin "/" final, ej: https://tei201-grupo6-default-rtdb.firebaseio.com
+#define FIREBASE_URL "https://TU-PROYECTO-default-rtdb.firebaseio.com"
+// Opcional: "database secret" o token. Dejar "" si las reglas permiten escritura (ver README).
+#define FIREBASE_AUTH ""
+
+// ---------- Pines (ESP32 DevKit V1, 30 pines) ----------
+#define PIN_ONEWIRE 4     // DS18B20 (bus 1-Wire, con pull-up de 4.7 kΩ a 3.3 V)
+#define PIN_SERVO 18      // señal del servo SG90 (alimentado a 5 V externos)
+#define PIN_LED_OK 26     // LED verde: válvula abierta
+#define PIN_LED_FAIL 27   // LED rojo: falla de sensor / sin WiFi
+
+// ---------- Direcciones ROM de los DS18B20 ----------
+// Obtenerlas con firmware/utils/escanear_ds18b20/escanear_ds18b20.ino y etiquetar cada sonda.
+// Si se dejan en cero se usa el orden de aparición en el bus (menos confiable).
+#define ADDR_COL  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // sonda en la salida del colector
+#define ADDR_TANK {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // sonda en el tanque
+// Si solo tienes 2 sondas (colector y tanque), cambia a 0 y deja ADDR_AMB como está:
+#define HAS_AMBIENT 1
+#define ADDR_AMB  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // sonda de ambiente (a la sombra)
+
+// ---------- Servo (calibrar con el montaje real) ----------
+#define SERVO_OPEN_DEG 90
+#define SERVO_CLOSED_DEG 0
+#define SERVO_MIN_US 500
+#define SERVO_MAX_US 2400
+
+// ---------- Muestreo ----------
+// 10 s: el tanque y el colector tienen constantes de tiempo de minutos, así que 10 s
+// sobra para el control y entrega ~8 600 muestras/día (cabe en el plan gratuito).
+#define SAMPLE_MS 10000UL
+
+// ---------- Modo de ensayo ----------
+// 1 = el controlador mueve la válvula (operación normal / ensayo A)
+// 0 = válvula siempre abierta, equivale a un termosifón sin válvula (ensayo B del protocolo P5)
+#define CONTROL_ENABLED 1
