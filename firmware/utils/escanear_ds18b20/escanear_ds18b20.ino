@@ -10,7 +10,7 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-#define PIN_ONEWIRE 4
+#define PIN_ONEWIRE 33   // mismo pin que la perfboard final
 OneWire oneWire(PIN_ONEWIRE);
 DallasTemperature sensors(&oneWire);
 

@@ -14,9 +14,9 @@
 // Opcional: "database secret" o token. Dejar "" si las reglas permiten escritura (ver README).
 #define FIREBASE_AUTH ""
 
-// ---------- Pines (ESP32 DevKit V1, 30 pines) ----------
-#define PIN_ONEWIRE 4     // DS18B20 (bus 1-Wire, con pull-up de 4.7 kΩ a 3.3 V)
-#define PIN_SERVO 18      // señal del servo SG90 (alimentado a 5 V externos)
+// ---------- Pines (ESP32 DevKit de 38 pines, perfboard final) ----------
+#define PIN_ONEWIRE 33    // DS18B20 (bus 1-Wire, con pull-up de 4.7 kΩ a 3.3 V)
+#define PIN_SERVO 13      // señal del servo SG90 (alimentado a 5 V externos)
 #define PIN_LED_OK 26     // LED verde: válvula abierta
 #define PIN_LED_FAIL 27   // LED rojo: falla de sensor / sin WiFi
 
@@ -26,7 +26,7 @@
 #define ADDR_COL  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // sonda en la salida del colector
 #define ADDR_TANK {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // sonda en el tanque
 // Si solo tienes 2 sondas (colector y tanque), cambia a 0 y deja ADDR_AMB como está:
-#define HAS_AMBIENT 1
+#define HAS_AMBIENT 0
 #define ADDR_AMB  {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}  // sonda de ambiente (a la sombra)
 
 // ---------- Servo (calibrar con el montaje real) ----------

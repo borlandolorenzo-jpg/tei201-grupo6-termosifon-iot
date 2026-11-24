@@ -13,8 +13,8 @@ flowchart LR
   S1["DS18B20 COL"] --- COL
   S2["DS18B20 TANK"] --- TAN
   S3["DS18B20 AMB (opcional)"] --- AMB
-  S1 & S2 & S3 -->|"1-Wire (GPIO4)"| MCU["ESP32<br/>control.h + main.ino"]
-  MCU -->|"PWM 50 Hz (GPIO18)"| VAL
+  S1 & S2 & S3 -->|"1-Wire (GPIO33)"| MCU["ESP32<br/>control.h + main.ino"]
+  MCU -->|"PWM 50 Hz (GPIO13)"| VAL
   MCU -->|"GPIO26 / GPIO27"| LED["LED estado"]
   MCU -->|"WiFi · HTTPS"| FB[("Firebase<br/>Realtime Database")]
   FB --> DASH["Dashboard web<br/>gráficos · indicadores · alertas"]

@@ -4,7 +4,6 @@
 **Integrantes:** Lorenzo Borlando · Cristóbal Fuentes · Micaela Miserda
 **Fecha de la declaración:** 18 de noviembre de 2026
 
-> Los campos marcados **[COMPLETAR]** deben ser revisados por el equipo antes de entregar: versiones instaladas y cualquier cambio que hayan hecho al probar con el hardware real.
 
 ---
 
@@ -14,7 +13,7 @@
 
 | Librería | Versión | Uso en el proyecto | Fuente |
 |---|---|---|---|
-| OneWire (Paul Stoffregen; autores originales Jim Studt, Tom Pollard y otros) | 2.3.8 | Protocolo 1-Wire para comunicar las sondas DS18B20 en un solo pin (GPIO4): 2 en este prototipo (colector y tanque); la de ambiente es opcional (`HAS_AMBIENT` en `config.h`) | https://github.com/PaulStoffregen/OneWire |
+| OneWire (Paul Stoffregen; autores originales Jim Studt, Tom Pollard y otros) | 2.3.8 | Protocolo 1-Wire para comunicar las sondas DS18B20 en un solo pin (GPIO33): 2 en este prototipo (colector y tanque); la de ambiente es opcional (`HAS_AMBIENT` en `config.h`) | https://github.com/PaulStoffregen/OneWire |
 | DallasTemperature (Miles Burton) | 4.0.6 | Lectura de temperatura de las DS18B20 por dirección ROM, resolución de 12 bits, conversión sin bloqueo | https://github.com/milesburton/Arduino-Temperature-Control-Library |
 | ESP32Servo (Kevin Harrington, John K. Bennett) | 3.2.1 | Control PWM a 50 Hz del servo SG90 que simula la válvula | https://github.com/madhephaestus/ESP32Servo |
 | Arduino core para ESP32 (Espressif): `WiFi.h`, `WiFiClientSecure.h`, `HTTPClient.h`, `time.h` | esp32 by Espressif Systems 3.3.4 | Conexión WiFi, peticiones HTTPS a Firebase y hora por NTP | https://github.com/espressif/arduino-esp32 |
@@ -63,14 +62,14 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 
 ### 3.1 Firmware `firmware/main/control.h` — controlador diferencial con histéresis
 - **Qué generó la IA:** estructura de la clase `DiffController`, reglas de apertura/cierre por ΔT, modo de falla (válvula abierta tras 3 lecturas inválidas), protección por sobretemperatura y tiempo mínimo entre movimientos.
-- **Adaptación al proyecto:** umbrales iniciales ΔT_on = 5 K y ΔT_off = 2 K elegidos para que la banda de 3 K supere el error combinado de dos sondas (±0.5 °C cada una); límite de 65 °C para el tanque de plástico. **[COMPLETAR: valores finales tras las pruebas]**.
+- **Adaptación al proyecto:** umbrales iniciales ΔT_on = 5 K y ΔT_off = 2 K elegidos para que la banda de 3 K supere el error combinado de dos sondas (±0.5 °C cada una); límite de 65 °C para el tanque de plástico. Estos son los valores cargados en el prototipo final.
 - **Comprensión del equipo:** la válvula se abre cuando el colector está al menos 5 K más caliente que el tanque (hay sol) y se cierra cuando la diferencia baja a 2 K o menos (de noche, para evitar el flujo inverso). Entre ambos valores mantiene su estado para no conmutar por ruido. Si falla un sensor, queda abierta para que el sistema funcione como un termosifón común y no se sobrecaliente el colector. Se probó en PC con `testing/unit/test_control.cpp` (siete grupos de pruebas, resultado en `testing/unit/resultado_test_control.txt`).
 
 ### 3.2 Firmware `firmware/main/main.ino`, `config.h.example` y `firmware/utils/escanear_ds18b20`
 - **Qué generó la IA:** estructura general del programa, cola de muestras, envío a Firebase, indicadores LED, utilidad para leer las direcciones de las sondas.
-- **Adaptación:** pines (GPIO4, 18, 26, 27), periodo de muestreo de 10 s justificado por la inercia térmica del tanque, modo `CONTROL_ENABLED` para el ensayo B (sin válvula). **[COMPLETAR: cambios hechos al probar con el hardware]**.
+- **Adaptación:** periodo de muestreo de 10 s justificado por la inercia térmica del tanque y modo `CONTROL_ENABLED` para el ensayo B (sin válvula). Al soldar la perfboard con un ESP32 de 38 pines, el equipo cambió los pines a **GPIO33** (bus 1-Wire de las sondas) y **GPIO13** (servo); los LED quedan en GPIO26 y GPIO27. Como el prototipo tiene solo 2 sondas (colector y tanque), `HAS_AMBIENT` quedó en 0 por defecto para que no se marque una falla de la sonda de ambiente inexistente.
 - **Comprensión del equipo:** cada 10 s se pide la temperatura, se espera 800 ms, se leen las sondas (colector y tanque; ambiente si existe), el controlador decide el estado de la válvula, se mueve el servo, la muestra entra a la cola y se envía a Firebase si hay WiFi.
-- **Verificación:** el código se revisó contra cabeceras simuladas de Arduino para detectar errores de sintaxis en PC; el equipo compiló el programa en Arduino IDE (placa ESP32 Dev Module, core 3.3.4) sin errores: 1 053 931 bytes de programa (80 %) y 51 984 bytes de memoria dinámica (15 %), el 19 de noviembre de 2026. **[COMPLETAR: confirmar que cargó y funcionó en el ESP32 real]**.
+- **Verificación:** el código se revisó contra cabeceras simuladas de Arduino para detectar errores de sintaxis en PC; el equipo compiló el programa en Arduino IDE (placa ESP32 Dev Module, core 3.3.4) sin errores: 1 053 931 bytes de programa (80 %) y 51 984 bytes de memoria dinámica (15 %), el 19 de noviembre de 2026.
 
 ### 3.3 Dashboard `dashboard/` (HTML, CSS, JavaScript)
 - **Qué generó la IA:** interfaz, gráficos con Chart.js, indicadores del periodo, alertas, exportación a CSV, modo de demostración con datos simulados (`?demo=1`, claramente rotulado y no usado como evidencia).
@@ -85,8 +84,13 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 
 ### 3.5 Documentación y diseño
 - **Qué generó la IA:** borradores del protocolo de testing, README, esquemático en SVG (`hardware/esquematico.svg`), BOM, guía del gemelo 3D, guion de presentación y diapositivas. También el modelo 3D de **referencia** (`diseño-3d/modelo_referencia/`, script en Python con la librería CadQuery 2.8.0, STEP/STL, renders en three.js y plano en SVG/PDF) a partir de medidas nominales de hojas de datos; el modelo paramétrico final en Fusion 360 lo hace el equipo.
-- **Adaptación:** el equipo revisó el contenido contra el diseño real del proyecto y completó los valores marcados como pendientes (costos reales de la BOM, medidas con pie de metro, resultados). **[COMPLETAR]**
+- **Adaptación:** el equipo revisó el contenido contra el diseño real del proyecto: número de sondas (2), pines de la perfboard final (GPIO33 y GPIO13), placa de 38 pines y reemplazo de la válvula solenoide por el servo.
 - **Costos de la BOM:** los valores unitarios son estimados y deben reemplazarse por los de las boletas.
+
+### 3.6 Actualización del 24 de noviembre de 2026
+- **Herramienta:** Claude (Anthropic).
+- **Qué hizo la IA:** a pedido del equipo, propagó el cambio de pines (GPIO4/18 → GPIO33/13), la placa de 38 pines y la configuración de 2 sondas (`HAS_AMBIENT` = 0) al firmware, el esquemático, la guía de montaje, la arquitectura y este archivo.
+- **Decisión del equipo:** los pines 33 y 13 los eligió el equipo al soldar la perfboard; la IA solo actualizó la documentación y el código para que coincidan con la placa real.
 
 ---
 
@@ -100,4 +104,4 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 | Fotografías del prototipo | Micaela Miserda, Cristóbal Fuentes y Lorenzo Borlando |
 | Ensayos del protocolo P1–P6 y registro de datos | Micaela Miserda, Cristóbal Fuentes y Lorenzo Borlando |
 
-**[COMPLETAR por el equipo]** — agregar aquí cualquier otro elemento hecho por el equipo (por ejemplo, modificaciones a los códigos al probar con el hardware).
+| Elección de pines de la perfboard final (GPIO33 para las sondas, GPIO13 para el servo) | Lorenzo Borlando |

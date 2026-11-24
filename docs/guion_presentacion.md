@@ -60,5 +60,5 @@
 - [ ] Ensayar completo **3 veces** con cronómetro (8–10 min)
 - [ ] Cada persona sabe qué diapositiva y qué parte de la demo le toca
 - [ ] Dashboard abierto, repositorio abierto, Fusion 360 abierto con el ensamble
-- [ ] URL del repositorio en la diapositiva final
+- [x] URL del repositorio en la diapositiva final
 - [ ] Todas las cosas subidas a GitHub **antes** de la presentación

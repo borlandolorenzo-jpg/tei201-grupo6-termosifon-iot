@@ -1,14 +1,15 @@
 /*
  * TEI201 · Grupo 6 — Colector solar termosifón con válvula anti-flujo-inverso (IoT)
- * Plataforma: ESP32 DevKit V1 · Arduino core for ESP32
+ * Plataforma: ESP32 DevKit (38 pines) · Arduino core for ESP32
  *
  * Qué hace:
- *   1. Lee 3 sondas DS18B20 en un bus 1-Wire: colector (T_col), tanque (T_tank) y ambiente (T_amb).
+ *   1. Lee 2 sondas DS18B20 en un bus 1-Wire (GPIO33): colector (T_col) y tanque (T_tank).
+ *      La sonda de ambiente (T_amb) es opcional: HAS_AMBIENT = 1 en config.h.
  *   2. Decide si la válvula (servo SG90) debe estar abierta o cerrada con un controlador
  *      diferencial con histéresis (control.h).
  *   3. Guarda cada muestra en Firebase Realtime Database (histórico + estado actual) vía REST.
  *      Si no hay WiFi, acumula hasta 180 muestras en RAM (30 min) y las envía al reconectar.
- *   4. Señaliza con 2 LED: verde = válvula abierta, rojo = falla de sensor o sin WiFi.
+ *   4. Mueve el servo en GPIO13. Señaliza con 2 LED: verde = válvula abierta, rojo = falla de sensor o sin WiFi.
  *
  * Flujo: sensor -> procesamiento (control.h) -> actuador (servo) -> conectividad (Firebase) -> dashboard.
  * Ver FUENTES.md para librerías y ayuda de IA declaradas.
@@ -25,9 +26,9 @@
 #include "config.h"   // copiar desde config.h.example
 
 // 1 = hay sonda de ambiente (3 sondas); 0 = solo colector y tanque (2 sondas).
-// Si config.h no lo define, se asume 1.
+// Si config.h no lo define, se asume 0 (prototipo con 2 sondas).
 #ifndef HAS_AMBIENT
-#define HAS_AMBIENT 1
+#define HAS_AMBIENT 0
 #endif
 #include "control.h"
 

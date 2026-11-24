@@ -22,7 +22,7 @@ La rúbrica acepta sólidos simples (cajas y cilindros) con el volumen y la posi
 
 | Componente | Dimensiones iniciales (mm) | Notas para el modelo |
 |---|---|---|
-| ESP32 DevKit V1 (30 pines) | ≈ 52 × 28 × 12 (incluye zócalos) | Medir; dejar libre la antena y el acceso al conector USB |
+| ESP32 DevKit (38 pines) | ≈ 52 × 28 × 12 (incluye zócalos) | Medir; dejar libre la antena y el acceso al conector USB |
 | Perfboard | 90 × 70 × 1.6 | Sobre 4 separadores M3 de 6 mm |
 | Servo SG90 | cuerpo 23 × 12.5 × 22.7; con orejas 32.5 de largo | Compartimiento propio; paso del cable y del eje |
 | Borneras 3 pines (×3) | 16 × 8 × 10 | Cables de sondas salen por la pared superior |

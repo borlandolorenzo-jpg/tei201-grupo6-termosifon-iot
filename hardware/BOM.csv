@@ -1,5 +1,5 @@
 n,componente,especificacion,cantidad,costo_unitario_clp_estimado,costo_total_clp,funcion
-1,ESP32 DevKit V1 (30 pines),"ESP32-WROOM-32, WiFi + BT, 3.3 V lógico, 12-bit ADC",1,8000,8000,"Microcontrolador: lee sondas, controla el servo, envía datos a Firebase"
+1,ESP32 DevKit (38 pines),"ESP32-WROOM-32, WiFi + BT, 3.3 V lógico, 12-bit ADC",1,8000,8000,"Microcontrolador: lee sondas, controla el servo, envía datos a Firebase"
 2,Sonda de temperatura DS18B20 sumergible,"Rango −55…+125 °C, ±0.5 °C (−10…+85 °C), 12 bit (0.0625 °C), cable 1 m, acero inox.",2,3500,7000,Medir T colector y T tanque (la sonda de ambiente es opcional y no se incluye)
 3,Servomotor SG90 9 g,"4.8–6 V, torque ≈ 1.8 kg·cm, ≈ 650 mA en bloqueo",1,3000,3000,Simula la válvula (abierta/cerrada)
 4,Resistencia 4.7 kΩ,"1/4 W, 5 %",1,50,50,Pull-up del bus 1-Wire
