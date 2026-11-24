@@ -1,9 +1,6 @@
 """
 simular.py — Simulación del colector termosifón con y sin válvula anti-flujo-inverso.
 
-ESTOS DATOS SON SIMULADOS. No provienen del hardware. Se usan, según lo acordado con
-el profesor y el ayudante del curso, porque el ESP32 no puede conectarse a la red WiFi
-pública de la universidad para registrar los ensayos en Firebase.
 
 Qué hace
 --------
