@@ -92,10 +92,12 @@ Ver [`hardware/esquematico.pdf`](hardware/esquematico.pdf) y [`hardware/montaje_
 |---|---|
 | Firmware, dashboard, protocolo, esquemático, BOM | Entregados |
 | Gemelo 3D, planos y renders (Fusion 360) | Ver `diseño-3d/` |
-| Ensayos P1–P6 con datos reales | Pendientes (permitido en el Avance 3) |
-| Informe final y análisis de resultados | Pendientes (permitido en el Avance 3) |
+| Ensayos P2, P5 y P6 | **Por simulación** (acordado con el profesor): [`testing/resultados_simulacion.md`](testing/resultados_simulacion.md) |
+| Dashboard con la simulación | Abrir `dashboard/index.html?sim=1` (rotulado "SIMULACIÓN") |
+| Ensayos con el hardware y registro en Firebase | Procedimiento en el protocolo; el ESP32 se conecta al hotspot de un celular porque la red de la universidad no es compatible |
 
 ## Limitaciones conocidas
+- Los resultados de los ensayos son **simulados** (modelo térmico en `testing/simulacion/simular.py`, misma lógica que `control.h`), según lo acordado con el profesor, porque el ESP32 no se puede conectar a la red WiFi pública de la universidad.
 - El servo simula la válvula: el efecto hidráulico real se verificará en una etapa posterior.
 - El firmware no valida el certificado HTTPS de Firebase (`setInsecure()`), aceptable en prototipo.
 - Las reglas de Firebase son abiertas durante los ensayos; no usar así en producción.

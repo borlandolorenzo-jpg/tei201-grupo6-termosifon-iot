@@ -4,7 +4,7 @@ subtitle: "TEI 201 · Taller de Diseño en Ingeniería · Grupo 6 · Avance N.º
 ---
 
 **Integrantes:** Lorenzo Borlando · Cristóbal Fuentes · Micaela Miserda
-**Versión:** 1.0 (18-11-2026) · **Estado:** protocolo completo; ejecución de los ensayos definitivos pendiente (permitido en el Avance 3)
+**Versión:** 1.0 (18-11-2026) · **Estado:** protocolo completo; P2, P5 y P6 ejecutados **por simulación** (ver `testing/resultados_simulacion.md`)
 
 # 0. Alcance y estado
 
@@ -16,7 +16,8 @@ Este documento define **cómo se comprobará** que el sistema funciona y que res
 |---|---|
 | Pruebas unitarias del controlador en PC (7 grupos, todas pasan) | `testing/unit/resultado_test_control.txt` |
 | Pruebas unitarias de los indicadores del dashboard (9, todas pasan) | `testing/unit/resultado_test_analytics.txt` |
-| Ensayos P1–P6 con el hardware | **Pendientes** (se ejecutan después del Avance 3 con el procedimiento de la sección 4) |
+| Ensayos P2, P5 y P6 por simulación (modelo térmico + copia del controlador), acordado con el profesor porque el ESP32 no puede usar la red WiFi de la universidad | `testing/resultados_simulacion.md` · `testing/resultados/simulacion/` |
+| Ensayos con el hardware | Mismo procedimiento de la sección 4, con el ESP32 conectado al hotspot de un celular |
 
 **Sonda de ambiente:** el prototipo se construyó con 2 sondas (S1 colector y S2 tanque), que son las únicas que usa el controlador. La sonda S3 (ambiente) es opcional (`HAS_AMBIENT` en `config.h`); si no se instala, la temperatura ambiente de los ensayos nocturnos se registra con el termómetro de referencia.
 

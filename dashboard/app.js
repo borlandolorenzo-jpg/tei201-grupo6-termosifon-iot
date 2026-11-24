@@ -3,6 +3,7 @@
   'use strict';
   const params = new URLSearchParams(location.search);
   const DEMO = params.get('demo') === '1';   // ?demo=1 muestra datos SIMULADOS (solo para ver el diseño)
+  const SIM = params.get('sim') === '1';     // ?sim=1 muestra la simulación de testing/simulacion/simular.py
   const $ = (id) => document.getElementById(id);
 
   // ---------- Configuración (config.js + localStorage) ----------
@@ -19,6 +20,7 @@
   // ---------- Descarga ----------
   async function fetchRows(hours) {
     if (DEMO) return Analytics.demoRows(Math.floor(Date.now() / 1000), hours);
+    if (SIM) return simRows(hours);
     const n = Math.round((hours * 3600) / 10) + 20;
     let url = cfg.FIREBASE_URL.replace(/\/$/, '') + '/lecturas.json?orderBy=' +
       encodeURIComponent('"$key"') + '&limitToLast=' + n;
@@ -28,6 +30,24 @@
     const data = await res.json();
     if (!data) return [];
     return Object.keys(data).sort().map((k) => data[k]).filter((r) => r && r.ts > 0);
+  }
+
+  // ---------- Simulación (?sim=1): carga sim_data.js solo cuando se pide ----------
+  let simLoaded = null;
+  function loadSim() {
+    if (!simLoaded) simLoaded = new Promise((ok, fail) => {
+      const s = document.createElement('script');
+      s.src = 'sim_data.js'; s.onload = ok; s.onerror = () => fail(new Error('no se encontró sim_data.js'));
+      document.head.appendChild(s);
+    });
+    return simLoaded;
+  }
+  async function simRows(hours) {
+    await loadSim();
+    const all = window.SIM_ROWS || [];
+    const end = all.length ? all[all.length - 1][0] : 0;
+    return all.filter((r) => r[0] > end - hours * 3600)
+      .map((r) => ({ ts: r[0], tc: r[1], tt: r[2], ta: r[3], v: r[4], f: r[5] }));
   }
 
   // ---------- Utilidades de formato ----------
@@ -97,6 +117,7 @@
     });
     const badge = $('badge');
     if (DEMO) { badge.className = 'badge demo'; badge.textContent = 'DATOS SIMULADOS (demo)'; }
+    else if (SIM) { badge.className = 'badge demo'; badge.textContent = 'SIMULACIÓN (modelo térmico)'; }
     else if (k.last && k.online) { badge.className = 'badge on'; badge.textContent = 'En línea'; }
     else { badge.className = 'badge off'; badge.textContent = 'Sin conexión'; }
 
@@ -134,7 +155,7 @@
       d.appendChild(a); d.appendChild(b); kp.appendChild(d);
     });
     $('status').textContent = k.last
-      ? 'Muestras: ' + k.n + ' · Última lectura: ' + new Date(k.last.ts * 1000).toLocaleString('es-CL') + ' · Actualiza cada ' + cfg.REFRESH_S + ' s'
+      ? 'Muestras: ' + k.n + ' · Última lectura: ' + new Date(k.last.ts * 1000).toLocaleString('es-CL') + (SIM ? ' · Datos de simulación (no se actualizan)' : ' · Actualiza cada ' + cfg.REFRESH_S + ' s')
       : '';
     updateCharts(hours);
   }
@@ -156,7 +177,7 @@
     const blob = new Blob([Analytics.toCSV(rows)], { type: 'text/csv' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'registro_' + new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-') + (DEMO ? '_DEMO' : '') + '.csv';
+    a.download = 'registro_' + new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-') + (DEMO ? '_DEMO' : SIM ? '_SIMULACION' : '') + '.csv';
     a.click();
     URL.revokeObjectURL(a.href);
   });
@@ -176,5 +197,5 @@
 
   makeCharts();
   refresh();
-  timer = setInterval(refresh, Math.max(5, Number(cfg.REFRESH_S) || 10) * 1000);
+  if (!SIM) timer = setInterval(refresh, Math.max(5, Number(cfg.REFRESH_S) || 10) * 1000);
 })();

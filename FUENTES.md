@@ -72,7 +72,7 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 - **Verificación:** el código se revisó contra cabeceras simuladas de Arduino para detectar errores de sintaxis en PC; el equipo compiló el programa en Arduino IDE (placa ESP32 Dev Module, core 3.3.4) sin errores: 1 053 931 bytes de programa (80 %) y 51 984 bytes de memoria dinámica (15 %), el 19 de noviembre de 2026.
 
 ### 3.3 Dashboard `dashboard/` (HTML, CSS, JavaScript)
-- **Qué generó la IA:** interfaz, gráficos con Chart.js, indicadores del periodo, alertas, exportación a CSV, modo de demostración con datos simulados (`?demo=1`, claramente rotulado y no usado como evidencia).
+- **Qué generó la IA:** interfaz, gráficos con Chart.js, indicadores del periodo, alertas, exportación a CSV, modo de demostración con datos simulados (`?demo=1`, claramente rotulado y no usado como evidencia; los resultados simulados se describen en la sección 3.6).
 - **Adaptación:** definiciones de los indicadores del problema (tiempo de flujo inverso evitado, horas captando calor, cierres, calor almacenado), alertas de agua lista (≥ 45 °C), sobretemperatura, falla de sensor y dispositivo sin reportar.
 - **Comprensión del equipo:** el dashboard descarga las últimas lecturas de Firebase, las convierte en indicadores (`dashboard/analytics.js`) y las grafica; si no recibe datos por más de 60 s marca "Sin conexión".
 - **Verificación:** nueve pruebas unitarias en `testing/unit/test_analytics.js` y revisión visual en navegador con datos de demostración.
@@ -80,14 +80,22 @@ No se copió código de repositorios, foros ni tutoriales. Los siguientes elemen
 ### 3.4 `testing/analisis.py` y pruebas unitarias
 - **Qué generó la IA:** script de análisis de los ensayos P1–P6 y las pruebas unitarias.
 - **Adaptación:** criterios de aceptación y fórmulas ligados al protocolo del proyecto.
-- **Verificación:** el script se probó con datos **sintéticos generados solo para validar el código**; esos datos no se incluyen en el repositorio ni se usan como resultados.
+- **Verificación:** el script se probó con datos **sintéticos generados solo para validar el código**; esos datos de prueba no se incluyen; los resultados simulados del Avance 3 son otra cosa y se declaran en la sección 3.6.
 
 ### 3.5 Documentación y diseño
 - **Qué generó la IA:** borradores del protocolo de testing, README, esquemático en SVG (`hardware/esquematico.svg`), BOM, guía del gemelo 3D, guion de presentación y diapositivas. También el modelo 3D de **referencia** (`diseño-3d/modelo_referencia/`, script en Python con la librería CadQuery 2.8.0, STEP/STL, renders en three.js y plano en SVG/PDF) a partir de medidas nominales de hojas de datos; el modelo paramétrico final en Fusion 360 lo hace el equipo.
 - **Adaptación:** el equipo revisó el contenido contra el diseño real del proyecto: número de sondas (2), pines de la perfboard final (GPIO33 y GPIO13), placa de 38 pines y reemplazo de la válvula solenoide por el servo.
 - **Costos de la BOM:** los valores unitarios son estimados y deben reemplazarse por los de las boletas.
 
-### 3.6 Actualización del 24 de noviembre de 2026
+### 3.6 Simulación de los ensayos (`testing/simulacion/simular.py`, `dashboard/sim_data.js`, `testing/resultados_simulacion.md`)
+- **Herramienta:** Claude (Anthropic), 24 de noviembre de 2026.
+- **Motivo:** según lo acordado con el profesor y el ayudante, los ensayos con registro en la nube se reemplazaron por una simulación, porque el ESP32 no puede conectarse a la red WiFi pública de la universidad.
+- **Qué generó la IA:** el modelo térmico de dos masas (colector y tanque), la copia en Python de `control.h`, los CSV simulados (`testing/datos/simulacion/SIM_*`), el modo `?sim=1` del dashboard, el análisis de sensibilidad y el documento de resultados.
+- **Supuestos:** área 0.3 m², τα 0.70, U_L 10 W/m²K, tanque de 20 L con UA 2.5 W/K, termosifón directo 15 W/K e inverso 4 W/K. Son órdenes de magnitud típicos, no medidos en el colector del grupo.
+- **Transparencia:** todos los archivos simulados llevan el prefijo `SIM_`, los gráficos tienen la marca "SIMULACIÓN" y el dashboard los rotula igual. No se presentan como mediciones.
+- **Comprensión del equipo:** el modelo resuelve cada 10 s el balance de energía del colector (sol que entra menos pérdidas al ambiente y al tanque) y del tanque (lo que llega del colector menos sus pérdidas). Con la válvula abierta y el tanque más caliente que el colector, el calor fluye al revés: eso es el flujo inverso nocturno que la válvula evita.
+
+### 3.7 Actualización del 24 de noviembre de 2026
 - **Herramienta:** Claude (Anthropic).
 - **Qué hizo la IA:** a pedido del equipo, propagó el cambio de pines (GPIO4/18 → GPIO33/13), la placa de 38 pines y la configuración de 2 sondas (`HAS_AMBIENT` = 0) al firmware, el esquemático, la guía de montaje, la arquitectura y este archivo.
 - **Decisión del equipo:** los pines 33 y 13 los eligió el equipo al soldar la perfboard; la IA solo actualizó la documentación y el código para que coincidan con la placa real.

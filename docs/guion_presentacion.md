@@ -12,7 +12,7 @@
 | 2:00–5:30 | 3. **Demo en vivo** | Lorenzo y Micaela | Ver guion de demo abajo |
 | 5:30–6:30 | 4. Hardware | Lorenzo | Perfboard soldada, ESP32 en zócalos, sondas y servo con conectores. Mostrar fotos de 3 ángulos, BOM con costo total y justificación de componentes |
 | 6:30–7:30 | 5. Diseño 3D | Lorenzo | Gemelo 3D: todos los componentes con volúmenes reales. Decisiones: dos piezas con 4 tornillos, compartimiento del servo, accesos USB y jack. Abrir Fusion y mostrar el interior; planos y renders |
-| 7:30–9:00 | 6. Testing y validación | Micaela | Protocolo P1–P6: calibración vs. referencia, lógica de control, conectividad, alimentación, ensayo nocturno A/B (con y sin válvula) y desempeño diurno. Criterios medibles. Los datos definitivos están pendientes; explicar el procedimiento y mostrar las pruebas unitarias que ya pasan |
+| 7:30–9:00 | 6. Testing y validación | Micaela | Protocolo P1–P6: calibración vs. referencia, lógica de control, conectividad, alimentación, ensayo nocturno A/B (con y sin válvula) y desempeño diurno. Criterios medibles. Resultados **por simulación** (acordado con el profesor; decirlo explícitamente): P2 6/6 transiciones correctas y modo seguro; P5 la válvula reduce 25 % la pérdida nocturna (≈ 135 Wh/noche); P6 el tanque llega a 45 °C a las 16:09. Hallazgo: con tanque aislado la reducción sube a 52 % → aislar el tanque es la próxima mejora. Mostrar `dashboard/index.html?sim=1` |
 | 9:00–9:30 | 7. GitHub | Cristóbal | Mostrar el repositorio: carpetas, README, FUENTES.md |
 | 9:30–10:00 | 8. Cierre | Todos | Qué resolvimos, qué falta (ensayos y análisis) y próximos pasos |
 

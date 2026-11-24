@@ -1,6 +1,6 @@
 # testing/datos — datos experimentales
 
-Aquí van los archivos CSV de cada prueba del [protocolo](../protocolo_pruebas.md). **Solo datos reales**: no se suben datos simulados.
+Aquí van los archivos CSV de cada prueba del [protocolo](../protocolo_pruebas.md). En esta carpeta van **solo datos reales**. Los datos de la simulación (acordada con el profesor) están aparte, en `simulacion/`, todos con el prefijo `SIM_`; se generan con `python testing/simulacion/simular.py`.
 
 | Archivo | Prueba | Cómo se obtiene |
 |---|---|---|
