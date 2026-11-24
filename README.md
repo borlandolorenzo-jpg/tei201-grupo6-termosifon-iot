@@ -4,6 +4,8 @@
 **Integrantes:** Lorenzo Borlando · Cristóbal Fuentes · Micaela Miserda
 **Profesor:** Camilo Wilson · **ODS 7:** Energía asequible y no contaminante
 
+**Dashboard en línea:** https://borlandolorenzo-jpg.github.io/tei201-grupo6-termosifon-iot/dashboard/?sim=1 (simulación)
+
 Sistema IoT que mide las temperaturas de un colector solar termosifón, decide cuándo cerrar una válvula para evitar el flujo inverso nocturno, guarda los datos en la nube y los muestra en un dashboard con indicadores y alertas.
 
 ## Problema que resuelve (referencia al Avance 1)
@@ -93,7 +95,7 @@ Ver [`hardware/esquematico.pdf`](hardware/esquematico.pdf) y [`hardware/montaje_
 | Firmware, dashboard, protocolo, esquemático, BOM | Entregados |
 | Gemelo 3D, planos y renders (Fusion 360) | Ver `diseño-3d/` |
 | Ensayos P2, P5 y P6 | **Por simulación** (acordado con el profesor): [`testing/resultados_simulacion.md`](testing/resultados_simulacion.md) |
-| Dashboard con la simulación | Abrir `dashboard/index.html?sim=1` (rotulado "SIMULACIÓN") |
+| Dashboard con la simulación | [https://borlandolorenzo-jpg.github.io/tei201-grupo6-termosifon-iot/dashboard/?sim=1](https://borlandolorenzo-jpg.github.io/tei201-grupo6-termosifon-iot/dashboard/?sim=1) (rotulado "SIMULACIÓN") |
 | Ensayos con el hardware y registro en Firebase | Procedimiento en el protocolo; el ESP32 se conecta al hotspot de un celular porque la red de la universidad no es compatible |
 
 ## Limitaciones conocidas
