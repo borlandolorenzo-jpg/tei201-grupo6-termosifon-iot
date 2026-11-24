@@ -17,7 +17,7 @@ Registro de cambios, problemas y decisiones. La rúbrica de Testing y Validació
 
 | Fecha | Síntoma | Causa | Solución | Evidencia |
 |---|---|---|---|---|
-| nov 2026 | La válvula solenoide de 12 V no servía para el prototipo | No era adecuada para el montaje y reemplazarla era muy caro | Se reemplaza por un servo SG90 que simula la válvula; la fuente se simplifica a 5 V | Esta tabla y `README.md` (nota de alcance) |
+| nov 2026 | La válvula solenoide de 12 V no servía para el prototipo | No era adecuada para el montaje y reemplazarla era muy caro | Se reemplaza por un servo SG90 que simula la válvula; la fuente se simplifica a 5 V | `hardware/fotos/iteraciones/alpha_protoboard_rele.jpg` (antes) y `hardware/fotos/01_encapsulado_abierto_componentes.jpg` (después) |
 | 24 nov 2026 | Revisión del código: con solo 2 sondas el firmware habría marcado falla de sensor permanente (LED rojo) | `HAS_AMBIENT` venía en 1 y el código esperaba una tercera sonda de ambiente | `HAS_AMBIENT` = 0 por defecto en `main.ino` y `config.h.example` | Commit del 24-11-2026 |
 | 24 nov 2026 | Firmware y esquemático con pines distintos a los de la placa soldada (GPIO4/18 vs GPIO33/13) | La documentación se escribió antes de soldar la perfboard | Se actualizan firmware, esquemático y guía de montaje a GPIO33/13 | Commit del 24-11-2026 |
 
