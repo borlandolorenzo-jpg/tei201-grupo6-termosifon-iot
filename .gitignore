@@ -4,4 +4,5 @@ firmware/main/config.h
 __pycache__/
 *.pyc
 .DS_Store
-testing/resultados/
+testing/resultados/*
+!testing/resultados/simulacion/

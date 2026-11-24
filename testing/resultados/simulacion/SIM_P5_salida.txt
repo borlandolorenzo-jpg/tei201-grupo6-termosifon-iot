@@ -1,0 +1,18 @@
+
+== P5 · Ensayo nocturno A (con válvula) ==
+            archivo  horas     T0     Tf  T_amb_media  perdida_K  perdida_norm
+SIM_P5_A_noche1.csv 10.997 43.500 25.125       18.091     18.375         0.723
+SIM_P5_A_noche2.csv 10.997 41.500 24.000       17.607     17.500         0.732
+SIM_P5_A_noche3.csv 10.997 45.812 25.750       18.254     20.062         0.728
+
+== P5 · Ensayo nocturno B (sin válvula) ==
+            archivo  horas    T0     Tf  T_amb_media  perdida_K  perdida_norm
+SIM_P5_B_noche1.csv 10.997 43.25 18.938       18.091     24.312         0.966
+SIM_P5_B_noche2.csv 10.997 41.00 18.062       17.607     22.938         0.981
+SIM_P5_B_noche3.csv 10.997 45.25 19.062       18.254     26.188         0.970
+
+Pérdida normalizada media: A = 0.728  B = 0.972
+Reducción de la pérdida nocturna con válvula: 25.1 %  (criterio propuesto ≥ 25 %)
+Dispersión entre noches: s_A = 0.005, s_B = 0.007 (n_A=3, n_B=3)
+Energía perdida media (20 L): A = 434 Wh · B = 569 Wh
+RESULTADO P5: CUMPLE

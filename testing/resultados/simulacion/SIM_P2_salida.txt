@@ -1,0 +1,14 @@
+
+== P2 · Transiciones de la válvula ==
+                        t evento  t_col_c  t_tank_c     dT  falla  coherente
+2026-11-20 08:43:30-03:00   ABRE    28.81     23.81   5.00      0       True
+2026-11-20 18:03:20-03:00 CIERRA    47.94     45.94   2.00      0       True
+2026-11-20 18:19:50-03:00   ABRE    50.25     45.25   5.00      0       True
+2026-11-20 18:30:10-03:00 CIERRA    47.38     45.38   2.00      0       True
+2026-11-20 23:00:20-03:00   ABRE      NaN     37.12    NaN      1       True
+2026-11-20 23:02:00-03:00 CIERRA    18.69     37.00 -18.31      0       True
+
+Transiciones: 6 · coherentes con las reglas: 100 % (criterio 100 %)
+Ventanas con >2 transiciones en 10 min (chattering): 0 (criterio 0)
+Muestras dentro de la banda muerta (2.0–5.0 K): 1597
+RESULTADO P2: CUMPLE

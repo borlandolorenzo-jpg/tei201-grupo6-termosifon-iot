@@ -1,0 +1,5 @@
+
+== P6 · Desempeño diurno ==
+T máx. tanque: 46.1 °C · objetivo 45 °C alcanzado: sí, a las 16:09
+Horas captando calor: 9.50 h · flujo inverso con válvula abierta: 0.00 h · cierres: 3
+RESULTADO P6: CUMPLE
