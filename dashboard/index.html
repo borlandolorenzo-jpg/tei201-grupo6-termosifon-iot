@@ -52,6 +52,18 @@
   dialog label{display:block;margin:8px 0 2px;font-size:13px;color:var(--muted)}
   dialog input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
   .err{color:var(--bad);font-size:13px}
+  .why{font-size:15px;margin:0 0 12px}
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+  .rule{border:1px solid var(--line);border-radius:10px;padding:10px 12px;opacity:.6}
+  .rule.on{opacity:1;border-width:2px}
+  .rule.on.r-open{border-color:var(--good);background:var(--good-bg)}
+  .rule.on.r-closed{border-color:var(--warn);background:var(--warn-bg)}
+  .rule.on.r-hold{border-color:var(--teal)}
+  .rule.on.r-safe{border-color:var(--bad);background:var(--bad-bg)}
+  .rule .tag{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .rule .cond{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+  .rule .res{font-size:13px;margin-top:2px}
+  .rule .when{font-size:12.5px;color:var(--muted);margin-top:4px}
 </style>
 </head>
 <body>
@@ -77,6 +89,18 @@
     <div class="card tile"><div class="label">Tanque</div><div><span class="value" id="vTank">–</span><span class="unit"> °C</span></div><div class="sub" id="tankSub">Objetivo agua caliente</div></div>
     <div class="card tile"><div class="label">Ambiente</div><div><span class="value" id="vAmb">–</span><span class="unit"> °C</span></div><div class="sub">A la sombra</div></div>
     <div class="card tile"><div class="label">ΔT = colector − tanque</div><div><span class="value" id="vDt">–</span><span class="unit"> K</span></div><div class="sub">Válvula: <span id="vValve" class="chip closed">–</span></div></div>
+  </section>
+
+  <section class="card" aria-labelledby="hRules">
+    <h2 id="hRules">¿Por qué la válvula está así?</h2>
+    <p class="why" id="why">–</p>
+    <div class="rules">
+      <div class="rule r-open" id="rOpen"><div class="tag">Abre</div><div class="cond">ΔT ≥ 5 K</div><div class="res">El colector está al menos 5 °C más caliente que el tanque → <b>ABIERTA</b></div><div class="when">De día, con sol: el agua caliente sube al tanque.</div></div>
+      <div class="rule r-closed" id="rClosed"><div class="tag">Cierra</div><div class="cond">ΔT ≤ 2 K</div><div class="res">El colector ya casi no está más caliente que el tanque → <b>CERRADA</b></div><div class="when">Al atardecer y de noche: evita que el agua caliente baje por el colector frío (flujo inverso).</div></div>
+      <div class="rule r-hold" id="rHold"><div class="tag">Mantiene</div><div class="cond">2 K &lt; ΔT &lt; 5 K</div><div class="res">No cambia: <b>sigue como estaba</b></div><div class="when">Banda de histéresis: evita que el servo se mueva por ruido de las sondas.</div></div>
+      <div class="rule r-safe" id="rSafe"><div class="tag">Modo seguro</div><div class="cond">Falla de sonda</div><div class="res">3 lecturas inválidas seguidas → <b>ABIERTA</b></div><div class="when">Funciona como un termosifón normal y el colector no se sobrecalienta. Además cierra si el tanque llega a 65 °C.</div></div>
+    </div>
+    <p class="note">ΔT = temperatura del colector − temperatura del tanque. Tiempo mínimo entre movimientos del servo: 60 s.</p>
   </section>
 
   <section class="grid2">

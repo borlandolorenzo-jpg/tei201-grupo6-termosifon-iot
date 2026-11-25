@@ -110,10 +110,27 @@
     chDt.update();
   }
 
+  // ---------- Explicación del estado de la válvula (reglas de control.h) ----------
+  function explain(last, d) {
+    const on = Number(cfg.DT_ON), off = Number(cfg.DT_OFF), tmax = Number(cfg.TANK_MAX_C);
+    const st = last.v === 1 ? 'ABIERTA' : 'CERRADA';
+    const num = (x) => typeof x === 'number' && isFinite(x);
+    let rule, txt;
+    if (last.f & 3 || !num(d)) { rule = 'rSafe'; txt = 'La válvula está <b>' + st + '</b> por <b>modo seguro</b>: una sonda no entrega lectura válida.'; }
+    else if (num(last.tt) && last.tt >= tmax) { rule = 'rSafe'; txt = 'La válvula está <b>CERRADA</b> por <b>sobretemperatura</b>: el tanque llegó a ' + last.tt.toFixed(1) + ' °C.'; }
+    else if (d >= on) { rule = 'rOpen'; txt = 'La válvula está <b>' + st + '</b> porque ΔT = <b>' + d.toFixed(1) + ' K</b>, que es ≥ ' + on + ' K: el colector calienta el agua.'; }
+    else if (d <= off) { rule = 'rClosed'; txt = 'La válvula está <b>' + st + '</b> porque ΔT = <b>' + d.toFixed(1) + ' K</b>, que es ≤ ' + off + ' K' + (d < 0 ? ': el tanque está más caliente que el colector, así que abrirla dejaría escapar el calor (flujo inverso).' : ': el colector ya no aporta calor.'); }
+    else { rule = 'rHold'; txt = 'La válvula sigue <b>' + st + '</b> porque ΔT = <b>' + d.toFixed(1) + ' K</b> está entre ' + off + ' y ' + on + ' K: mantiene el estado anterior.'; }
+    $('why').innerHTML = txt;
+    ['rOpen', 'rClosed', 'rHold', 'rSafe'].forEach((id) => $(id).classList.toggle('on', id === rule));
+  }
+
   // ---------- Tarjetas, alertas, indicadores ----------
   function render(hours) {
     const k = Analytics.computeKPIs(rows, {
-      tankLiters: Number(cfg.TANK_LITERS), hotTargetC: Number(cfg.HOT_TARGET_C), tankMaxC: Number(cfg.TANK_MAX_C), dtOn: Number(cfg.DT_ON)
+      tankLiters: Number(cfg.TANK_LITERS), hotTargetC: Number(cfg.HOT_TARGET_C), tankMaxC: Number(cfg.TANK_MAX_C), dtOn: Number(cfg.DT_ON),
+      // En la simulación el "ahora" es el final de los datos: no tiene sentido la alerta de dispositivo sin reportar
+      nowS: SIM && rows.length ? rows[rows.length - 1].ts : Math.floor(Date.now() / 1000)
     });
     const badge = $('badge');
     if (DEMO) { badge.className = 'badge demo'; badge.textContent = 'DATOS SIMULADOS (demo)'; }
@@ -130,6 +147,7 @@
       v.textContent = k.last.v === 1 ? 'ABIERTA' : 'CERRADA';
       v.className = 'chip ' + (k.last.v === 1 ? 'open' : 'closed');
       $('tankSub').textContent = 'Objetivo agua caliente: ' + cfg.HOT_TARGET_C + ' °C';
+      explain(k.last, k.deltaT);
     }
 
     const ul = $('alerts');
