@@ -48,7 +48,7 @@ La lista completa de componentes con cantidades y costos está en [`hardware/BOM
 │   └── utils/           escanear_ds18b20 (direcciones de las sondas)
 ├── dashboard/           index.html · app.js · analytics.js · config.js · sim_data.js
 ├── hardware/            esquematico.pdf/.png/.svg · BOM.xlsx/.csv · montaje_perfboard.md · fotos/
-├── diseño-3d/           modelo de referencia (STEP/STL) · planos · renders
+├── diseño-3d/           archivos de Fusion 360 (.f3d) · modelo de referencia (STEP/STL) · planos · renders
 ├── testing/             protocolo_pruebas.pdf/.md · resultados_simulacion.md · simulacion/ · analisis.py · unit/ · datos/ · resultados/
 └── docs/                presentacion_final.pdf · Presentacion_Avance3.pptx · arquitectura · guion · checklist · notas de iteración
 ```

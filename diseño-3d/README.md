@@ -10,7 +10,7 @@ Guía para modelar en **Fusion 360** el encapsulado y el ensamble completo (geme
 |---|---|---|
 | `layout_interno_propuesto.svg/.png` | Distribución interna en planta (referencia para el boceto) | Listo |
 | `modelo_referencia/` | **Modelo 3D de referencia** generado con CadQuery: `base.step`, `tapa.step`, `ensamble_completo.step` (con todos los componentes), STL de la base y la tapa, `componentes.csv` y los scripts que los generan. Se importa a Fusion 360 como punto de partida | Listo (medidas nominales) |
-| `encapsulado_termosifon.f3z` | Ensamble completo en Fusion 360 | **Pendiente (modelar)** |
+| `CW_LB_106_11.f3d` · `CW_LB_106_21.f3d` | Archivos de Fusion 360 del encapsulado hechos por el equipo (se abren con *Archivo → Abrir → Abrir desde mi equipo*) | Listo |
 | `planos/plano_referencia.pdf/.svg` | Plano A3 1:1 de referencia: vista frontal, lateral, planta y corte A-A con cotas y tolerancias | Listo como referencia · **reemplazar por el plano exportado de Fusion 360** |
 | `renders/` | `render_exterior.png`, `render_interior.png`, `render_explosionado.png` (del modelo de referencia) | Listo como referencia · **rehacer con materiales en Fusion 360 (espacio Render)** |
 

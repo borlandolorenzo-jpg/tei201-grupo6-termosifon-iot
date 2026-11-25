@@ -29,7 +29,7 @@
 ## Diseño 3D (20 %)
 | Ítem | Estado |
 |---|---|
-| Archivo `.f3d`/`.f3z` con el ensamble completo (todos los componentes) | 🔧 modelar en Fusion con la guía de `diseño-3d/README.md`; hay un ensamble de referencia importable en `diseño-3d/modelo_referencia/ensamble_completo.step` |
+| Archivo `.f3d`/`.f3z` con el ensamble completo (todos los componentes) | ✅ `diseño-3d/CW_LB_106_11.f3d` y `CW_LB_106_21.f3d` · 🔧 verificar que el ensamble incluya ESP32, sondas, servo y alimentación |
 | Modelo paramétrico sin interferencias | 🔧 |
 | Planos con vistas, cotas, tolerancias y escala (PDF) | ✅ referencia en `diseño-3d/planos/plano_referencia.pdf` · 🔧 reemplazar por el exportado de Fusion |
 | Renders exterior e interior o explosionado | ✅ referencia en `diseño-3d/renders/` · 🔧 rehacer en Fusion con materiales |
