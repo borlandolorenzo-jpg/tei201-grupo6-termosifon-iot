@@ -30,7 +30,7 @@ Más detalle en [`docs/arquitectura.md`](docs/arquitectura.md).
 | Subsistema | Componente | Función |
 |---|---|---|
 | Sensores | 2× DS18B20 sumergibles (+1 opcional de ambiente) | T colector y T tanque; T ambiente si se instala la tercera sonda (`HAS_AMBIENT` en `config.h`) |
-| Procesamiento | ESP32 DevKit V1 | Lectura, control diferencial con histéresis, envío de datos |
+| Procesamiento | ESP32 DevKit (38 pines), en perfboard 50 × 70 mm con zócalos | Lectura, control diferencial con histéresis, envío de datos |
 | Actuador | Servo SG90 | Abre / cierra (simula la válvula) |
 | Conectividad | WiFi + Firebase Realtime Database (REST) | Repositorio persistente |
 | Visualización | Dashboard HTML + Chart.js | Gráficos, indicadores y alertas |
@@ -43,14 +43,14 @@ La lista completa de componentes con cantidades y costos está en [`hardware/BOM
 
 ```
 ├── README.md · FUENTES.md
-├── firmware/
+├── firmware/            README.md (pines y librerías)
 │   ├── main/            main.ino · control.h · config.h.example
 │   └── utils/           escanear_ds18b20 (direcciones de las sondas)
-├── dashboard/           index.html · app.js · analytics.js · config.js
-├── hardware/            esquematico.pdf/.svg · BOM.xlsx/.csv · montaje_perfboard.md
-├── diseño-3d/           especificación del gemelo 3D · .f3d · planos · renders
-├── testing/             protocolo_pruebas.pdf/.md · analisis.py · unit/ · datos/ · evidencia/
-└── docs/                arquitectura · guion de presentación · checklist · notas de iteración
+├── dashboard/           index.html · app.js · analytics.js · config.js · sim_data.js
+├── hardware/            esquematico.pdf/.png/.svg · BOM.xlsx/.csv · montaje_perfboard.md · fotos/
+├── diseño-3d/           modelo de referencia (STEP/STL) · planos · renders
+├── testing/             protocolo_pruebas.pdf/.md · resultados_simulacion.md · simulacion/ · analisis.py · unit/ · datos/ · resultados/
+└── docs/                presentacion_final.pdf · Presentacion_Avance3.pptx · arquitectura · guion · checklist · notas de iteración
 ```
 
 ## Instalación y uso
@@ -71,17 +71,24 @@ La lista completa de componentes con cantidades y costos está en [`hardware/BOM
 ### 2. Firmware
 1. Instalar **Arduino IDE** con el paquete de placas *esp32* (Espressif) y, en el Gestor de librerías: `OneWire`, `DallasTemperature` y `ESP32Servo`.
 2. Copiar `firmware/main/config.h.example` como `firmware/main/config.h` y completar WiFi y URL de Firebase (`config.h` no se sube a GitHub).
-3. Conectar las sondas, abrir `firmware/utils/escanear_ds18b20/escanear_ds18b20.ino`, anotar la dirección de cada sonda y pegarlas en `ADDR_COL`, `ADDR_TANK` y `ADDR_AMB` de `config.h`.
-4. Placa **ESP32 Dev Module**, abrir `firmware/main/main.ino` y cargar. El Monitor Serie (115200) muestra cada ciclo.
+3. Conectar las sondas, abrir `firmware/utils/escanear_ds18b20/escanear_ds18b20.ino`, anotar la dirección de cada sonda y pegarlas en `ADDR_COL` y `ADDR_TANK` de `config.h` (`ADDR_AMB` solo si se instala la tercera sonda y `HAS_AMBIENT` = 1).
+4. Revisar en `config.h` los pines de la perfboard: `PIN_ONEWIRE 33` (sondas) y `PIN_SERVO 13` (servo).
+5. Placa **ESP32 Dev Module**, abrir `firmware/main/main.ino` y cargar. El Monitor Serie (115200) muestra cada ciclo.
 
 ### 3. Dashboard
 - Editar `dashboard/config.js` con la URL de Firebase, el volumen del tanque y la temperatura objetivo.
 - Abrir `dashboard/index.html` en el navegador (doble clic) o publicarlo con GitHub Pages.
 - Botones: periodo (1 h a 3 días), **Exportar CSV** y **Configuración**.
-- `index.html?demo=1` muestra datos **simulados** solo para ver el diseño; el dashboard lo rotula como demo.
+- `index.html?sim=1` muestra la **simulación** de los ensayos (`testing/simulacion/simular.py`), rotulada "SIMULACIÓN". Versión en línea: enlace al inicio de este README.
+- `index.html?demo=1` muestra datos de demostración solo para ver el diseño.
+- Para que el ESP32 envíe datos sin la red de la universidad, conectarlo al **hotspot de un celular** (red de 2.4 GHz; en iPhone activar "Maximizar compatibilidad").
 
 ### 4. Conexión del hardware
 Ver [`hardware/esquematico.pdf`](hardware/esquematico.pdf) y [`hardware/montaje_perfboard.md`](hardware/montaje_perfboard.md).
+
+## Presentación
+- Diapositivas: [`docs/presentacion_final.pdf`](docs/presentacion_final.pdf) (y la versión editable `docs/Presentacion_Avance3.pptx`).
+- Guion y reparto: [`docs/guion_presentacion.md`](docs/guion_presentacion.md).
 
 ## Pruebas
 - **Unitarias (PC, sin hardware):** `g++ -std=c++17 -o test_control testing/unit/test_control.cpp && ./test_control` y `node testing/unit/test_analytics.js`.

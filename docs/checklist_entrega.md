@@ -3,7 +3,7 @@
 **Leyenda:** ✅ listo en este repositorio · 🔧 lo hace el equipo con el hardware real · 📝 completar con datos propios
 
 ## Requisito habilitante
-- ✅ `FUENTES.md` en la raíz del repo → 📝 completar versiones de librerías, cambios hechos al probar y la sección 4
+- ✅ `FUENTES.md` completo: librerías con versión y URL, código externo adaptado, uso de IA (incluida la simulación) y aportes del equipo
   *(sin FUENTES.md o vacío, Software queda con 1.0)*
 
 ## Software (30 %)
@@ -22,8 +22,8 @@
 | Justificación técnica de cada componente | ✅ columna "Justificación" de `hardware/BOM.xlsx` |
 | Esquemático completo | ✅ `hardware/esquematico.pdf` *(si el profesor exige Fritzing/KiCad, redibujar con la tabla de conexiones)* |
 | BOM con cantidades, especificación y costo | ✅ · 📝 reemplazar costos estimados por los de las boletas y completar la hoja del colector |
-| Montaje ordenado, conexiones seguras y etiquetadas | 🔧 soldar en perfboard (guía en `hardware/montaje_perfboard.md`) |
-| Fotografías desde al menos 3 ángulos | 🔧 guardar en `hardware/fotos/` |
+| Montaje ordenado, conexiones seguras y etiquetadas | ✅ perfboard soldada dentro del encapsulado (`hardware/fotos/`) |
+| Fotografías desde al menos 3 ángulos | ✅ 2 fotos del prototipo final + 1 de la versión Alpha · 🔧 faltan la caja cerrada y un lateral |
 | Diseño para la reparación (abrir el encapsulado en la demo) | 🔧 imprimir y ensayar |
 
 ## Diseño 3D (20 %)
@@ -41,8 +41,8 @@
 | Protocolo completo con las 7 secciones (a–g) | ✅ `testing/protocolo_pruebas.pdf` |
 | Pruebas unitarias en PC | ✅ `testing/unit/` |
 | Script de análisis listo | ✅ `testing/analisis.py` |
-| Resultados experimentales (P1–P6) | Pendiente permitido en el Avance 3 |
-| Al menos una falla encontrada y su solución | 📝 `docs/notas_iteracion.md` |
+| Resultados de P2, P5 y P6 | ✅ por simulación, acordado con el profesor: `testing/resultados_simulacion.md` |
+| Al menos una falla encontrada y su solución | ✅ `docs/notas_iteracion.md` (solenoide → servo, sonda de ambiente, pines) |
 
 ## GitHub (5 %)
 - ✅ Estructura de carpetas `firmware/ hardware/ diseño-3d/ testing/ docs/` y README completo
