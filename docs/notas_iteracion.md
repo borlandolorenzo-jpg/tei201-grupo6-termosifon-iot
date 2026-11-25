@@ -11,6 +11,7 @@ Registro de cambios, problemas y decisiones. La rúbrica de Testing y Validació
 | nov 2026 | Control con **histéresis diferencial** (5 K / 2 K) en vez de umbral simple | Con un solo umbral el ruido de las sondas hace conmutar la válvula | Banda de 3 K > error combinado de dos sondas (±0.5 °C cada una) |
 | nov 2026 | Se pasa de **3 a 2 sondas** DS18B20 (colector y tanque) | Solo se dispone de 2 sondas | La sonda de ambiente queda opcional (`HAS_AMBIENT` = 0); la temperatura ambiente de los ensayos se toma con el termómetro de referencia |
 | 23 nov 2026 | Pines finales en la perfboard: **GPIO33** (sondas) y **GPIO13** (servo), con ESP32 de **38 pines** | Ubicación en la placa soldada | Se actualizan `config.h`, esquemático y guía de montaje |
+| nov 2026 | El ensamble 3D con componentes en Fusion 360 se mantiene en la versión Alpha (relé y válvula solenoide) | Al simplificar la electrónica no hubo tiempo de rehacer el ensamble; el encapsulado impreso sí es el final | Componentes finales en el modelo de referencia STEP; ensamble Alpha en `diseño-3d/iteraciones/` |
 | 24 nov 2026 | Ensayos P2, P5 y P6 **por simulación** (acordado con el profesor y el ayudante) | El ESP32 no se conecta a la red WiFi pública de la universidad | Resultados en `testing/resultados_simulacion.md`; para el hardware se usará el hotspot de un celular (2.4 GHz) |
 | nov 2026 | **Modo seguro**: válvula abierta ante falla de sensor | Un servo cerrado con colector al sol podría sobrecalentar | Se prueba en P2 |
 

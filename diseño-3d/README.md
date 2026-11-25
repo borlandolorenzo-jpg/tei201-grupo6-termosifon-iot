@@ -10,11 +10,18 @@ Guía para modelar en **Fusion 360** el encapsulado y el ensamble completo (geme
 |---|---|---|
 | `layout_interno_propuesto.svg/.png` | Distribución interna en planta (referencia para el boceto) | Listo |
 | `modelo_referencia/` | **Modelo 3D de referencia** generado con CadQuery: `base.step`, `tapa.step`, `ensamble_completo.step` (con todos los componentes), STL de la base y la tapa, `componentes.csv` y los scripts que los generan. Se importa a Fusion 360 como punto de partida | Listo (medidas nominales) |
-| `CW_LB_106_11.f3d` · `CW_LB_106_21.f3d` | Archivos de Fusion 360 del encapsulado hechos por el equipo (se abren con *Archivo → Abrir → Abrir desde mi equipo*) | Listo |
+| `CW_LB_106_11.f3d` · `CW_LB_106_21.f3d` | Archivos de Fusion 360 del encapsulado impreso, hechos por el equipo (se abren con *Archivo → Abrir → Abrir desde mi equipo*) | Listo |
+| `iteraciones/ensamble_prototipo_alpha_rele_valvula.f3d` | **Ensamble completo en Fusion 360 con todos los componentes, de la versión anterior (Alpha)**: ESP32, relé, válvula solenoide de 12 V y su alimentación, sondas y LED | Listo · corresponde al prototipo antiguo (ver nota abajo) |
 | `planos/plano_referencia.pdf/.svg` | Plano A3 1:1 de referencia: vista frontal, lateral, planta y corte A-A con cotas y tolerancias | Listo como referencia · **reemplazar por el plano exportado de Fusion 360** |
 | `renders/` | `render_exterior.png`, `render_interior.png`, `render_explosionado.png` (del modelo de referencia) | Listo como referencia · **rehacer con materiales en Fusion 360 (espacio Render)** |
 
 > **Cómo usar el modelo de referencia:** en Fusion 360 usa *Insertar → Insertar malla / Abrir* con `modelo_referencia/ensamble_completo.step` para ver el ensamble y comparar tus medidas reales. Es un sólido importado, no paramétrico: la rúbrica pide un modelo **paramétrico**, así que rehaz la base y la tapa con los parámetros de la sección 3 (puedes copiar las cotas del plano) y guarda el `.f3z`. Las medidas del modelo son nominales y **deben verificarse con pie de metro** para que coincidan con el prototipo físico. Para regenerar el modelo con otras medidas: edita los parámetros al inicio de `modelo_referencia/generar_modelo.py` y ejecuta `python3 generar_modelo.py` (requiere `pip install cadquery`).
+
+## Nota sobre la versión final
+
+El ensamble con componentes en Fusion 360 (`iteraciones/ensamble_prototipo_alpha_rele_valvula.f3d`) se hizo para el **prototipo Alpha**, que usaba relé y válvula solenoide de 12 V. Para el prototipo final **se simplificó la electrónica**: la válvula solenoide y el relé se reemplazaron por un servo SG90 que simula la válvula, se eliminó la etapa de 12 V y la placa pasó a una perfboard de 50 × 70 mm. **No se rehízo el ensamble en Fusion 360** con esta electrónica simplificada; el encapsulado impreso (`CW_LB_106_*.f3d`) sí es el final.
+
+Los componentes de la versión final (ESP32, perfboard, servo, 2 sondas y alimentación de 5 V) están en el **modelo de referencia** `modelo_referencia/ensamble_completo.step` (lista en `componentes.csv`), con sus renders y plano. Los motivos del cambio están en `docs/notas_iteracion.md`.
 
 ## 2. Componentes del gemelo (volúmenes referenciales)
 

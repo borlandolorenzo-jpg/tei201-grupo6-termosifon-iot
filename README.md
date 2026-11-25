@@ -48,7 +48,7 @@ La lista completa de componentes con cantidades y costos está en [`hardware/BOM
 │   └── utils/           escanear_ds18b20 (direcciones de las sondas)
 ├── dashboard/           index.html · app.js · analytics.js · config.js · sim_data.js
 ├── hardware/            esquematico.pdf/.png/.svg · BOM.xlsx/.csv · montaje_perfboard.md · fotos/
-├── diseño-3d/           archivos de Fusion 360 (.f3d) · modelo de referencia (STEP/STL) · planos · renders
+├── diseño-3d/           encapsulado en Fusion 360 (.f3d) · ensamble del prototipo Alpha (iteraciones/) · modelo de referencia (STEP/STL) · planos · renders
 ├── testing/             protocolo_pruebas.pdf/.md · resultados_simulacion.md · simulacion/ · analisis.py · unit/ · datos/ · resultados/
 └── docs/                presentacion_final.pdf · Presentacion_Avance3.pptx · arquitectura · guion · checklist · notas de iteración
 ```
@@ -106,6 +106,7 @@ Ver [`hardware/esquematico.pdf`](hardware/esquematico.pdf) y [`hardware/montaje_
 | Ensayos con el hardware y registro en Firebase | Procedimiento en el protocolo; el ESP32 se conecta al hotspot de un celular porque la red de la universidad no es compatible |
 
 ## Limitaciones conocidas
+- El ensamble con componentes en Fusion 360 corresponde al prototipo Alpha (relé y válvula solenoide). La electrónica simplificada del prototipo final (servo, 5 V) no se volvió a modelar en Fusion; sus componentes están en el modelo de referencia `diseño-3d/modelo_referencia/ensamble_completo.step`. Detalle en [`diseño-3d/README.md`](diseño-3d/README.md).
 - Los resultados de los ensayos son **simulados** (modelo térmico en `testing/simulacion/simular.py`, misma lógica que `control.h`), según lo acordado con el profesor, porque el ESP32 no se puede conectar a la red WiFi pública de la universidad.
 - El servo simula la válvula: el efecto hidráulico real se verificará en una etapa posterior.
 - El firmware no valida el certificado HTTPS de Firebase (`setInsecure()`), aceptable en prototipo.
