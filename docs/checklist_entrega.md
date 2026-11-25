@@ -23,7 +23,7 @@
 | Esquemático completo | ✅ `hardware/esquematico.pdf` *(si el profesor exige Fritzing/KiCad, redibujar con la tabla de conexiones)* |
 | BOM con cantidades, especificación y costo | ✅ · 📝 reemplazar costos estimados por los de las boletas y completar la hoja del colector |
 | Montaje ordenado, conexiones seguras y etiquetadas | ✅ perfboard soldada dentro del encapsulado (`hardware/fotos/`) |
-| Fotografías desde al menos 3 ángulos | ✅ 2 fotos del prototipo final + 1 de la versión Alpha · 🔧 faltan la caja cerrada y un lateral |
+| Fotografías desde al menos 3 ángulos | ✅ 5 fotos del prototipo final (abierto, superior, lateral, trasero y montaje) + 1 de la versión Alpha |
 | Diseño para la reparación (abrir el encapsulado en la demo) | 🔧 imprimir y ensayar |
 
 ## Diseño 3D (20 %)
